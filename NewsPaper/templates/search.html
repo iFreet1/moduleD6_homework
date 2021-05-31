@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+<h2>Всего новостей: {{ news | length }}</h2>
+<hr>
+{% if news %}
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Найти">
+</form>
+
+<table>
+    <tr>
+        <td>Заголовок</td>
+        <td>Дата публикации</td>
+        <td>Новость</td>
+    </tr>
+    {% for item in filter.qs %}
+    <tr>
+        <td>{{ item.header }}</td>
+        <td>{{ item.create_date | date:'d M Y H:i' }}</td>
+        <td>{{ item.text | truncatechars:50 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h1>Новостей нет</h1>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends 'flatpages/default.html' %}
+
+{% block content %}
+
+<table>
+    <tr>
+        <td>Заголовок</td>
+        <td>Дата публикации</td>
+        <td>Новость</td>
+    </tr>
+    <tr>
+        <td>{{ news.header }}</td>
+        <td>{{ news.create_date | date:'d M Y H:i' }}</td>
+        <td>{{ news.text | truncatechars:50 }}</td>
+    </tr>
+</table>
+
+{% endblock content %}
